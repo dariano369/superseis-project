@@ -92,8 +92,7 @@ const initialStock = [
   { id: 64, name: 'Mostaza', category: 'Almacén', price: 3500, originalPrice: null, stock: 58, unit: 'unidades', status: 'in-stock', discount: 0 },
   { id: 65, name: 'Salsa de Tomate', category: 'Almacén', price: 3200, originalPrice: null, stock: 105, unit: 'unidades', status: 'in-stock', discount: 0 },
   { id: 66, name: 'Porotos', category: 'Almacén', price: 4500, originalPrice: null, stock: 78, unit: 'unidades', status: 'in-stock', discount: 0 },
-  { id: 67, name: 'Lentejas', category: 'Almacén', price: 4200, originalPrice: null, stock: 62, unit: 'unidades', status: 'in-stock', discount: 0 },
-  { id: 68, name: 'Polenta', category: 'Almacén', price: 3800, originalPrice: null, stock: 45, unit: 'unidades', status: 'in-stock', discount: 0 },
+ 
   
   // More Panadería
   { id: 69, name: 'Pan Francés', category: 'Panadería', price: 3200, originalPrice: null, stock: 52, unit: 'unidades', status: 'in-stock', discount: 0 },
