@@ -2,6 +2,8 @@ import { useMemo } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { useCart } from '../../context/CartContext'
 import { useLanguage } from '../../context/LanguageContext'
+import { useToast } from '../../context/ToastContext'
+import { usePageTitle } from '../../hooks/usePageTitle'
 import { formatPrice } from '../../utils/formatPrice'
 import { getStockStatus, getStatusColor, calculateSavings } from '../../utils/stockHelpers'
 import { categoryTranslationKeys } from '../../utils/categoryKeys'
@@ -12,8 +14,10 @@ export default function ProductPage() {
   const { id } = useParams()
   const { stock, addToCart } = useCart()
   const { t, productName } = useLanguage()
+  const { addToast } = useToast()
 
   const product = stock.find(p => p.id === Number(id))
+  usePageTitle(product ? productName(product) : t('detail.notFound'))
 
   const relatedProducts = useMemo(() => {
     if (!product) return []
@@ -48,7 +52,7 @@ export default function ProductPage() {
 
       <div className="product-detail">
         <div className="product-detail-image">
-          <div className="image-placeholder-large">{productName(product).charAt(0)}</div>
+          <div className="image-placeholder-large">{product.emoji || productName(product).charAt(0)}</div>
           {product.discount > 0 && (
             <div className="discount-badge-large">{product.discount}% OFF</div>
           )}
@@ -91,7 +95,7 @@ export default function ProductPage() {
           <button
             className={`add-to-cart-btn-large ${status === 'out-of-stock' ? 'disabled' : ''}`}
             disabled={status === 'out-of-stock'}
-            onClick={() => addToCart(product)}
+            onClick={() => { addToCart(product); addToast(`${productName(product)} — ${t('toast.addedToCart')}`) }}
           >
             {status === 'out-of-stock' ? t('product.noStock') : t('detail.addToCart')}
           </button>

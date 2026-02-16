@@ -1,12 +1,38 @@
-import { createContext, useContext, useState, useCallback } from 'react'
+import { createContext, useContext, useState, useCallback, useEffect } from 'react'
 import { initialStock } from '../data/products'
 import { getStockStatus } from '../utils/stockHelpers'
 
 const CartContext = createContext(null)
 
+function loadCartFromStorage() {
+  try {
+    const saved = localStorage.getItem('superseis-cart')
+    if (saved) {
+      const parsed = JSON.parse(saved)
+      if (Array.isArray(parsed)) {
+        // Reset stock levels from fresh initialStock data
+        return parsed.map(item => {
+          const freshProduct = initialStock.find(p => p.id === item.id)
+          if (freshProduct) {
+            return { ...item, stock: freshProduct.stock, status: freshProduct.status }
+          }
+          return item
+        }).filter(item => initialStock.some(p => p.id === item.id))
+      }
+    }
+  } catch (e) {
+    // If parsing fails, start with empty cart
+  }
+  return []
+}
+
 export function CartProvider({ children }) {
-  const [cart, setCart] = useState([])
+  const [cart, setCart] = useState(loadCartFromStorage)
   const [stock] = useState(initialStock)
+
+  useEffect(() => {
+    localStorage.setItem('superseis-cart', JSON.stringify(cart))
+  }, [cart])
 
   const addToCart = useCallback((product) => {
     const status = getStockStatus(product)
@@ -59,6 +85,10 @@ export function CartProvider({ children }) {
     return cart.reduce((total, item) => total + item.quantity, 0)
   }, [cart])
 
+  const clearCart = useCallback(() => {
+    setCart([])
+  }, [])
+
   const value = {
     cart,
     stock,
@@ -67,6 +97,7 @@ export function CartProvider({ children }) {
     updateCartQuantity,
     getCartTotal,
     getCartItemCount,
+    clearCart,
   }
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>

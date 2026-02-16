@@ -2,12 +2,18 @@ import { Routes, Route, Navigate, useParams, useSearchParams } from 'react-route
 import { CartProvider } from './context/CartContext'
 import { LanguageProvider } from './context/LanguageContext'
 import { AuthProvider } from './context/AuthContext'
+import { ToastProvider } from './context/ToastContext'
+import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary'
 import Layout from './components/Layout/Layout'
 import HomePage from './pages/HomePage/HomePage'
 import ProductsPage from './pages/ProductsPage/ProductsPage'
 import ProductPage from './pages/ProductPage/ProductPage'
 import CartPage from './pages/CartPage/CartPage'
 import ProfilePage from './pages/ProfilePage/ProfilePage'
+import CheckoutPage from './pages/CheckoutPage/CheckoutPage'
+import OrderConfirmationPage from './pages/OrderConfirmationPage/OrderConfirmationPage'
+import LoginPage from './pages/LoginPage/LoginPage'
+import NotFoundPage from './pages/NotFoundPage/NotFoundPage'
 
 function CategoryRedirect() {
   const { categoryName } = useParams()
@@ -21,23 +27,31 @@ function SearchRedirect() {
 
 function App() {
   return (
-    <LanguageProvider>
-      <AuthProvider>
-        <CartProvider>
-          <Routes>
-            <Route element={<Layout />}>
-              <Route path="/" element={<HomePage />} />
-              <Route path="/products" element={<ProductsPage />} />
-              <Route path="/product/:id" element={<ProductPage />} />
-              <Route path="/cart" element={<CartPage />} />
-              <Route path="/profile" element={<ProfilePage />} />
-              <Route path="/category/:categoryName" element={<CategoryRedirect />} />
-              <Route path="/search" element={<SearchRedirect />} />
-            </Route>
-          </Routes>
-        </CartProvider>
-      </AuthProvider>
-    </LanguageProvider>
+    <ErrorBoundary>
+      <LanguageProvider>
+        <AuthProvider>
+          <ToastProvider>
+            <CartProvider>
+              <Routes>
+                <Route element={<Layout />}>
+                  <Route path="/" element={<HomePage />} />
+                  <Route path="/products" element={<ProductsPage />} />
+                  <Route path="/product/:id" element={<ProductPage />} />
+                  <Route path="/cart" element={<CartPage />} />
+                  <Route path="/checkout" element={<CheckoutPage />} />
+                  <Route path="/order-confirmation" element={<OrderConfirmationPage />} />
+                  <Route path="/login" element={<LoginPage />} />
+                  <Route path="/profile" element={<ProfilePage />} />
+                  <Route path="/category/:categoryName" element={<CategoryRedirect />} />
+                  <Route path="/search" element={<SearchRedirect />} />
+                  <Route path="*" element={<NotFoundPage />} />
+                </Route>
+              </Routes>
+            </CartProvider>
+          </ToastProvider>
+        </AuthProvider>
+      </LanguageProvider>
+    </ErrorBoundary>
   )
 }
 

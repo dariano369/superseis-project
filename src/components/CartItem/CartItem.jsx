@@ -11,7 +11,7 @@ export default function CartItem({ item, variant = 'compact' }) {
     <div className={`cart-item ${variant === 'full' ? 'cart-item--full' : ''}`}>
       {variant === 'full' && (
         <div className="cart-item-image">
-          <div className="image-placeholder-small">{productName(item).charAt(0)}</div>
+          <div className="image-placeholder-small">{item.emoji || productName(item).charAt(0)}</div>
         </div>
       )}
       <div className="cart-item-info">

@@ -122,8 +122,58 @@ export default {
   'footer.hours': "Horario: Lune guive Domingo peve 8:00 - 22:00",
   'footer.rights': '2024 Superseis. Opavave derecho oñeñongatúva.',
 
+  // Checkout page
+  'checkout.title': "Emohu'apáma Ñejogua",
+  'checkout.shipping': 'Envío Rehegua',
+  'checkout.payment': 'Pago Rehegua',
+  'checkout.name': 'Téra completo',
+  'checkout.address': 'Dirección',
+  'checkout.city': 'Táva',
+  'checkout.phone': 'Teléfono',
+  'checkout.cashOnDelivery': 'Efectivo-pe',
+  'checkout.creditCard': 'Tarjeta de crédito',
+  'checkout.debitCard': 'Tarjeta de débito',
+  'checkout.cardNumber': 'Tarjeta número',
+  'checkout.expiry': 'Vencimiento',
+  'checkout.cvv': 'CVV',
+  'checkout.placeOrder': 'Emoneĩ Pedido',
+  'checkout.backToCart': 'Ejevy carrito-pe',
+
+  // Order confirmation
+  'order.title': 'Pedido Oñemoneĩma',
+  'order.confirmed': 'Pedido Oñemoneĩma',
+  'order.thankYou': 'Aguyje nde ñejogua',
+  'order.message': 'Nde pedido oñeprocesamaite.',
+  'order.successMessage': 'Nde pedido oñeprocesamaite. Romoĩta ndéve email detalle reheve.',
+  'order.backHome': 'Ejevy Ógape',
+  'order.continueShopping': 'Ejogua gueteri',
+
+  // 404 page
+  'notFound.title': 'Ndojejuhúi página',
+  'notFound.message': 'Ko página rehekáva ndaipóri térã oñemoambue.',
+  'notFound.backHome': 'Ejevy Ógape',
+  'notFound.goHome': 'Ejevy Ógape',
+
+  // Login page
+  'login.signIn': 'Eike',
+  'login.register': 'Eñe\'inscribí',
+  'login.email': 'Correo electrónico',
+  'login.password': 'Contraseña',
+  'login.confirmPassword': 'Emoneĩ contraseña',
+  'login.name': 'Téra completo',
+  'login.signInBtn': 'Eike',
+  'login.registerBtn': 'Emoheñói Cuenta',
+  'login.createAccount': 'Emoheñói Cuenta',
+  'login.forgotPassword': '¿Nderesaráipa nde contraseña?',
+  'login.orSignIn': '¿Erekóma cuenta? Eike',
+  'login.orRegister': "¿Ndererekói cuenta? Eñe'inscribí",
+
+  // Toast
+  'toast.addedToCart': 'Ojejuajúma carrito-pe',
+
   // Language names
   'lang.es': 'Español',
   'lang.en': 'English',
   'lang.gn': 'Guaraní',
+  'lang.de': 'Deutsch',
 }

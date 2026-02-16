@@ -133,19 +133,27 @@ export default function Header() {
               )}
             </div>
 
-            <button className="header-action-item account-btn" onClick={toggleLogin}>
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <path d="M12 12c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm0 2c-3.33 0-10 1.67-10 5v2h20v-2c0-3.33-6.67-5-10-5z" fill="currentColor"/>
-              </svg>
-              <div className="action-text">
-                <span className="action-label">
-                  {isLoggedIn ? t('header.loggedInAs') : t('header.signIn')}
-                </span>
-                <span className="action-title">
-                  {isLoggedIn ? t('profile.user') : t('header.myAccount')}
-                </span>
-              </div>
-            </button>
+            {isLoggedIn ? (
+              <button className="header-action-item account-btn" onClick={toggleLogin}>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <path d="M12 12c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm0 2c-3.33 0-10 1.67-10 5v2h20v-2c0-3.33-6.67-5-10-5z" fill="currentColor"/>
+                </svg>
+                <div className="action-text">
+                  <span className="action-label">{t('header.loggedInAs')}</span>
+                  <span className="action-title">{t('profile.user')}</span>
+                </div>
+              </button>
+            ) : (
+              <Link to="/login" className="header-action-item account-btn">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <path d="M12 12c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm0 2c-3.33 0-10 1.67-10 5v2h20v-2c0-3.33-6.67-5-10-5z" fill="currentColor"/>
+                </svg>
+                <div className="action-text">
+                  <span className="action-label">{t('header.signIn')}</span>
+                  <span className="action-title">{t('header.myAccount')}</span>
+                </div>
+              </Link>
+            )}
 
             <button
               className="header-action-item cart-btn"

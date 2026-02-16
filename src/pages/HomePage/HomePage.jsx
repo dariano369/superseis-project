@@ -2,6 +2,7 @@ import { useMemo } from 'react'
 import { useCart } from '../../context/CartContext'
 import { useAuth } from '../../context/AuthContext'
 import { useLanguage } from '../../context/LanguageContext'
+import { usePageTitle } from '../../hooks/usePageTitle'
 import Banner from '../../components/Banner/Banner'
 import ProductSlider from '../../components/ProductSlider/ProductSlider'
 import {
@@ -17,6 +18,7 @@ export default function HomePage() {
   const { stock } = useCart()
   const { isLoggedIn } = useAuth()
   const { t } = useLanguage()
+  usePageTitle(null)
 
   const deals = useMemo(() => getDealsProducts(stock), [stock])
   const newArrivals = useMemo(() => getNewArrivals(stock), [stock])
