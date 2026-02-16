@@ -1,8 +1,12 @@
 import { useState, useEffect, useRef } from 'react'
-import { Link, useNavigate, useLocation } from 'react-router-dom'
+import { Link, useNavigate, useLocation, useSearchParams } from 'react-router-dom'
 import { useCart } from '../../context/CartContext'
+import { useLanguage } from '../../context/LanguageContext'
+import { useAuth } from '../../context/AuthContext'
 import { categories } from '../../data/products'
+import { categoryTranslationKeys } from '../../utils/categoryKeys'
 import { formatPrice } from '../../utils/formatPrice'
+import { locales } from '../../i18n'
 import CartDropdown from '../CartDropdown/CartDropdown'
 import superseisLogo from '../../assets/superseis-logo.png'
 import './Header.css'
@@ -10,10 +14,15 @@ import './Header.css'
 export default function Header() {
   const [searchTerm, setSearchTerm] = useState('')
   const [showCart, setShowCart] = useState(false)
+  const [showLangMenu, setShowLangMenu] = useState(false)
   const cartRef = useRef(null)
+  const langRef = useRef(null)
   const navigate = useNavigate()
   const location = useLocation()
+  const [searchParams] = useSearchParams()
   const { getCartItemCount, getCartTotal } = useCart()
+  const { t, locale, changeLocale } = useLanguage()
+  const { isLoggedIn, toggleLogin } = useAuth()
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -35,19 +44,37 @@ export default function Header() {
   }, [showCart])
 
   useEffect(() => {
+    const handleLangClickOutside = (event) => {
+      if (langRef.current && !langRef.current.contains(event.target)) {
+        setShowLangMenu(false)
+      }
+    }
+
+    if (showLangMenu) {
+      document.addEventListener('mousedown', handleLangClickOutside)
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleLangClickOutside)
+    }
+  }, [showLangMenu])
+
+  useEffect(() => {
     setShowCart(false)
+    setShowLangMenu(false)
   }, [location.pathname])
 
   const handleSearchSubmit = (e) => {
     e.preventDefault()
     if (searchTerm.trim()) {
-      navigate(`/search?q=${encodeURIComponent(searchTerm.trim())}`)
+      navigate(`/products?q=${encodeURIComponent(searchTerm.trim())}`)
     }
   }
 
-  const activeCategory = location.pathname.startsWith('/category/')
-    ? decodeURIComponent(location.pathname.replace('/category/', ''))
+  const activeCategory = location.pathname === '/products'
+    ? (searchParams.get('category') || null)
     : null
+  const isAllActive = location.pathname === '/products' && !searchParams.get('category') && !searchParams.get('q') && !searchParams.get('deals') && !searchParams.get('new') && !searchParams.get('popular')
 
   return (
     <header className="header">
@@ -61,7 +88,7 @@ export default function Header() {
           <form className="search-container" onSubmit={handleSearchSubmit}>
             <input
               type="text"
-              placeholder="Buscar todo en Superseis"
+              placeholder={t('header.searchPlaceholder')}
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className="search-input"
@@ -74,15 +101,52 @@ export default function Header() {
           </form>
 
           <div className="header-actions">
-            <Link to="/profile" className="header-action-item">
+            <div className="language-switcher" ref={langRef}>
+              <button
+                className="lang-toggle"
+                onClick={() => setShowLangMenu(!showLangMenu)}
+              >
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z" fill="currentColor"/>
+                </svg>
+                <span>{locale.toUpperCase()}</span>
+                <svg width="10" height="10" viewBox="0 0 12 12" fill="none">
+                  <path d="M3 4.5l3 3 3-3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </button>
+              {showLangMenu && (
+                <div className="lang-dropdown">
+                  {locales.map(loc => (
+                    <button
+                      key={loc.code}
+                      className={`lang-option ${locale === loc.code ? 'active' : ''}`}
+                      onClick={() => {
+                        changeLocale(loc.code)
+                        setShowLangMenu(false)
+                      }}
+                    >
+                      <span className="lang-code">{loc.code.toUpperCase()}</span>
+                      <span className="lang-name">{loc.name}</span>
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            <button className="header-action-item account-btn" onClick={toggleLogin}>
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
                 <path d="M12 12c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm0 2c-3.33 0-10 1.67-10 5v2h20v-2c0-3.33-6.67-5-10-5z" fill="currentColor"/>
               </svg>
               <div className="action-text">
-                <span className="action-label">Iniciar Sesión</span>
-                <span className="action-title">Mi Cuenta</span>
+                <span className="action-label">
+                  {isLoggedIn ? t('header.loggedInAs') : t('header.signIn')}
+                </span>
+                <span className="action-title">
+                  {isLoggedIn ? t('profile.user') : t('header.myAccount')}
+                </span>
               </div>
-            </Link>
+            </button>
+
             <button
               className="header-action-item cart-btn"
               onClick={() => setShowCart(!showCart)}
@@ -104,22 +168,22 @@ export default function Header() {
       <nav className="nav-bar">
         <div className="nav-container">
           <Link
-            to="/"
-            className={`nav-item ${location.pathname === '/' ? 'active' : ''}`}
+            to="/products"
+            className={`nav-item ${isAllActive ? 'active' : ''}`}
           >
-            Todos
+            {t('nav.all')}
           </Link>
           {categories.filter(cat => cat !== 'Todos').map(category => (
             <Link
               key={category}
-              to={`/category/${encodeURIComponent(category)}`}
+              to={`/products?category=${encodeURIComponent(category)}`}
               className={`nav-item ${activeCategory === category ? 'active' : ''}`}
             >
-              {category}
+              {t(categoryTranslationKeys[category])}
             </Link>
           ))}
           <span className="nav-item nav-more">
-            Más
+            {t('header.more')}
             <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
               <path d="M3 4.5l3 3 3-3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>

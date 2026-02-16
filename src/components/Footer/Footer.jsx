@@ -1,36 +1,39 @@
+import { useLanguage } from '../../context/LanguageContext'
 import './Footer.css'
 
 export default function Footer() {
+  const { t } = useLanguage()
+
   return (
     <footer className="footer">
       <div className="footer-content">
         <div className="footer-section">
-          <h4>Acerca de Superseis</h4>
+          <h4>{t('footer.about')}</h4>
           <ul>
-            <li>Nuestra Historia</li>
-            <li>Sucursales</li>
-            <li>Trabaja con Nosotros</li>
+            <li>{t('footer.history')}</li>
+            <li>{t('footer.locations')}</li>
+            <li>{t('footer.careers')}</li>
           </ul>
         </div>
         <div className="footer-section">
-          <h4>Atención al Cliente</h4>
+          <h4>{t('footer.support')}</h4>
           <ul>
-            <li>Preguntas Frecuentes</li>
-            <li>Envíos y Entregas</li>
-            <li>Devoluciones</li>
+            <li>{t('footer.faq')}</li>
+            <li>{t('footer.delivery')}</li>
+            <li>{t('footer.returns')}</li>
           </ul>
         </div>
         <div className="footer-section">
-          <h4>Contacto</h4>
+          <h4>{t('footer.contact')}</h4>
           <ul>
-            <li>Teléfono: (021) 123-456</li>
-            <li>Email: contacto@superseis.com.py</li>
-            <li>Horarios: Lunes a Domingo 8:00 - 22:00</li>
+            <li>{t('footer.phone')}</li>
+            <li>{t('footer.email')}</li>
+            <li>{t('footer.hours')}</li>
           </ul>
         </div>
       </div>
       <div className="footer-bottom">
-        <p>&copy; 2024 Superseis. Todos los derechos reservados.</p>
+        <p>{t('footer.rights')}</p>
       </div>
     </footer>
   )
