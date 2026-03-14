@@ -1,0 +1,96 @@
+.banner-section {
+  margin-bottom: 2rem;
+}
+
+.banner {
+  background: linear-gradient(135deg, #e8f5e0 0%, #c8e6b4 50%, #a8d48a 100%);
+  color: #1a1a1a;
+  padding: 3rem 3rem;
+  border-radius: 12px;
+  position: relative;
+  overflow: hidden;
+  min-height: 280px;
+  display: flex;
+  align-items: center;
+}
+
+.banner-content {
+  position: relative;
+  z-index: 2;
+  max-width: 500px;
+}
+
+.banner-eyebrow {
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.banner-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  line-height: 1.15;
+  margin-bottom: 1.5rem;
+  color: #1a1a1a;
+}
+
+.banner-cta {
+  display: inline-block;
+  padding: 0.6rem 1.5rem;
+  border: 2px solid #1a1a1a;
+  border-radius: 24px;
+  color: #1a1a1a;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.banner-cta:hover {
+  background: #1a1a1a;
+  color: #ffffff;
+}
+
+/* Deals section header */
+.deals-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-top: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.deals-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 0.15rem;
+}
+
+.deals-subtitle {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.deals-view-all {
+  color: #4a8c2a;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.deals-view-all:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .banner {
+    padding: 2rem 1.5rem;
+    min-height: 200px;
+  }
+
+  .banner-title {
+    font-size: 1.75rem;
+  }
+}
