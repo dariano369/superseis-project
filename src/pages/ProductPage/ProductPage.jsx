@@ -1,16 +1,23 @@
 import { useMemo } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { useCart } from '../../context/CartContext'
+import { useLanguage } from '../../context/LanguageContext'
+import { useToast } from '../../context/ToastContext'
+import { usePageTitle } from '../../hooks/usePageTitle'
 import { formatPrice } from '../../utils/formatPrice'
 import { getStockStatus, getStatusColor, calculateSavings } from '../../utils/stockHelpers'
+import { categoryTranslationKeys } from '../../utils/categoryKeys'
 import ProductGrid from '../../components/ProductGrid/ProductGrid'
 import './ProductPage.css'
 
 export default function ProductPage() {
   const { id } = useParams()
   const { stock, addToCart } = useCart()
+  const { t, productName } = useLanguage()
+  const { addToast } = useToast()
 
   const product = stock.find(p => p.id === Number(id))
+  usePageTitle(product ? productName(product) : t('detail.notFound'))
 
   const relatedProducts = useMemo(() => {
     if (!product) return []
@@ -22,8 +29,8 @@ export default function ProductPage() {
   if (!product) {
     return (
       <div className="product-not-found">
-        <h2>Producto no encontrado</h2>
-        <Link to="/">Volver al inicio</Link>
+        <h2>{t('detail.notFound')}</h2>
+        <Link to="/">{t('detail.backHome')}</Link>
       </div>
     )
   }
@@ -34,26 +41,28 @@ export default function ProductPage() {
   return (
     <div className="product-page">
       <nav className="breadcrumb">
-        <Link to="/">Inicio</Link>
+        <Link to="/">{t('detail.home')}</Link>
         <span> / </span>
-        <Link to={`/category/${encodeURIComponent(product.category)}`}>
-          {product.category}
+        <Link to={`/products?category=${encodeURIComponent(product.category)}`}>
+          {categoryTranslationKeys[product.category] ? t(categoryTranslationKeys[product.category]) : product.category}
         </Link>
         <span> / </span>
-        <span>{product.name}</span>
+        <span>{productName(product)}</span>
       </nav>
 
       <div className="product-detail">
         <div className="product-detail-image">
-          <div className="image-placeholder-large">{product.name.charAt(0)}</div>
+          <div className="image-placeholder-large">{product.emoji || productName(product).charAt(0)}</div>
           {product.discount > 0 && (
             <div className="discount-badge-large">{product.discount}% OFF</div>
           )}
         </div>
 
         <div className="product-detail-info">
-          <h1 className="product-detail-name">{product.name}</h1>
-          <div className="product-detail-category">{product.category}</div>
+          <h1 className="product-detail-name">{productName(product)}</h1>
+          <div className="product-detail-category">
+            {categoryTranslationKeys[product.category] ? t(categoryTranslationKeys[product.category]) : product.category}
+          </div>
 
           <div className="product-detail-price">
             {product.originalPrice && (
@@ -64,31 +73,31 @@ export default function ProductPage() {
             <span className="current-price-large">{formatPrice(product.price)}</span>
             {savings > 0 && (
               <span className="savings-text-large">
-                Te ahorrás {formatPrice(savings)}
+                {t('detail.youSave')} {formatPrice(savings)}
               </span>
             )}
           </div>
 
           <div className="product-detail-stock">
-            <span className="stock-label">Disponibilidad: </span>
+            <span className="stock-label">{t('detail.availability')} </span>
             <span style={{ color: getStatusColor(status), fontWeight: 600 }}>
-              {status === 'in-stock' && `${product.stock} ${product.unit} disponibles`}
-              {status === 'low-stock' && `Solo quedan ${product.stock} ${product.unit}`}
-              {status === 'out-of-stock' && 'Sin stock'}
+              {status === 'in-stock' && `${product.stock} ${product.unit} ${t('detail.available')}`}
+              {status === 'low-stock' && `${t('detail.onlyLeft')} ${product.stock} ${product.unit}`}
+              {status === 'out-of-stock' && t('detail.noStock')}
             </span>
           </div>
 
           <div className="product-detail-unit">
-            <span>Unidad de venta: </span>
+            <span>{t('detail.salesUnit')} </span>
             <strong>{product.unit}</strong>
           </div>
 
           <button
             className={`add-to-cart-btn-large ${status === 'out-of-stock' ? 'disabled' : ''}`}
             disabled={status === 'out-of-stock'}
-            onClick={() => addToCart(product)}
+            onClick={() => { addToCart(product); addToast(`${productName(product)} — ${t('toast.addedToCart')}`) }}
           >
-            {status === 'out-of-stock' ? 'Sin Stock' : 'Agregar al Carrito'}
+            {status === 'out-of-stock' ? t('product.noStock') : t('detail.addToCart')}
           </button>
         </div>
       </div>
@@ -97,7 +106,7 @@ export default function ProductPage() {
         <div className="related-products">
           <ProductGrid
             products={relatedProducts}
-            title="Productos Relacionados"
+            title={t('detail.relatedProducts')}
           />
         </div>
       )}

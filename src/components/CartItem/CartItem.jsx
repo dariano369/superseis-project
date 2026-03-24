@@ -1,23 +1,25 @@
 import { useCart } from '../../context/CartContext'
+import { useLanguage } from '../../context/LanguageContext'
 import { formatPrice } from '../../utils/formatPrice'
 import './CartItem.css'
 
 export default function CartItem({ item, variant = 'compact' }) {
   const { updateCartQuantity, removeFromCart } = useCart()
+  const { t, productName } = useLanguage()
 
   return (
     <div className={`cart-item ${variant === 'full' ? 'cart-item--full' : ''}`}>
       {variant === 'full' && (
         <div className="cart-item-image">
-          <div className="image-placeholder-small">{item.name.charAt(0)}</div>
+          <div className="image-placeholder-small">{item.emoji || productName(item).charAt(0)}</div>
         </div>
       )}
       <div className="cart-item-info">
-        <h4>{item.name}</h4>
+        <h4>{productName(item)}</h4>
         <div className="cart-item-price">{formatPrice(item.price)}</div>
         {variant === 'full' && (
           <div className="cart-item-subtotal">
-            Subtotal: {formatPrice(item.price * item.quantity)}
+            {t('cart.subtotal')}: {formatPrice(item.price * item.quantity)}
           </div>
         )}
       </div>

@@ -127,6 +127,77 @@
   line-height: 1.2;
 }
 
+/* Language Switcher */
+.language-switcher {
+  position: relative;
+}
+
+.lang-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.5rem 0.75rem;
+  background: transparent;
+  border: none;
+  color: #ffffff;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: 24px;
+  transition: background 0.2s;
+}
+
+.lang-toggle:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.lang-dropdown {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  min-width: 160px;
+  overflow: hidden;
+  z-index: 100;
+}
+
+.lang-option {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  padding: 0.65rem 1rem;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 0.85rem;
+  color: #333;
+  transition: background 0.15s;
+}
+
+.lang-option:hover {
+  background: #f5f5f5;
+}
+
+.lang-option.active {
+  background: #eaf5e0;
+  color: #4a8c2a;
+  font-weight: 600;
+}
+
+.lang-code {
+  font-weight: 700;
+  font-size: 0.75rem;
+  width: 24px;
+}
+
+.lang-name {
+  flex: 1;
+  text-align: left;
+}
+
 /* Cart */
 .cart-btn {
   position: relative;

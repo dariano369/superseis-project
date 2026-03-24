@@ -26,11 +26,16 @@
 .footer-section ul li {
   margin-bottom: 0.75rem;
   color: #ccc;
-  cursor: pointer;
   transition: color 0.2s;
 }
 
-.footer-section ul li:hover {
+.footer-section ul li a {
+  color: #ccc;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.footer-section ul li a:hover {
   color: #fff;
 }
 
