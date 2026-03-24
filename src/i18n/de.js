@@ -122,6 +122,55 @@ export default {
   'footer.hours': 'Öffnungszeiten: Montag bis Sonntag 8:00 - 22:00',
   'footer.rights': '2024 Superseis. Alle Rechte vorbehalten.',
 
+  // Checkout page
+  'checkout.title': 'Zur Kasse',
+  'checkout.shipping': 'Lieferinformationen',
+  'checkout.payment': 'Zahlungsmethode',
+  'checkout.name': 'Vollständiger Name',
+  'checkout.address': 'Adresse',
+  'checkout.city': 'Stadt',
+  'checkout.phone': 'Telefon',
+  'checkout.cashOnDelivery': 'Barzahlung bei Lieferung',
+  'checkout.creditCard': 'Kreditkarte',
+  'checkout.debitCard': 'Debitkarte',
+  'checkout.cardNumber': 'Kartennummer',
+  'checkout.expiry': 'Ablaufdatum',
+  'checkout.cvv': 'CVV',
+  'checkout.placeOrder': 'Bestellung aufgeben',
+  'checkout.backToCart': 'Zurück zum Warenkorb',
+
+  // Order confirmation
+  'order.title': 'Bestellung bestätigt',
+  'order.confirmed': 'Bestellung bestätigt',
+  'order.thankYou': 'Vielen Dank für deinen Einkauf',
+  'order.message': 'Deine Bestellung wurde erfolgreich verarbeitet.',
+  'order.successMessage': 'Deine Bestellung wurde erfolgreich verarbeitet. Wir senden dir eine E-Mail mit den Details.',
+  'order.backHome': 'Zurück zur Startseite',
+  'order.continueShopping': 'Weiter einkaufen',
+
+  // 404 page
+  'notFound.title': 'Seite nicht gefunden',
+  'notFound.message': 'Die gesuchte Seite existiert nicht oder wurde verschoben.',
+  'notFound.backHome': 'Zurück zur Startseite',
+  'notFound.goHome': 'Zurück zur Startseite',
+
+  // Login page
+  'login.signIn': 'Anmelden',
+  'login.register': 'Registrieren',
+  'login.email': 'E-Mail',
+  'login.password': 'Passwort',
+  'login.confirmPassword': 'Passwort bestätigen',
+  'login.name': 'Vollständiger Name',
+  'login.signInBtn': 'Anmelden',
+  'login.registerBtn': 'Konto erstellen',
+  'login.createAccount': 'Konto erstellen',
+  'login.forgotPassword': 'Passwort vergessen?',
+  'login.orSignIn': 'Bereits ein Konto? Anmelden',
+  'login.orRegister': 'Noch kein Konto? Registrieren',
+
+  // Toast
+  'toast.addedToCart': 'Zum Warenkorb hinzugefügt',
+
   // Language names
   'lang.es': 'Español',
   'lang.en': 'English',

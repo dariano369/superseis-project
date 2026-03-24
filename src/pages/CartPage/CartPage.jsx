@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { useCart } from '../../context/CartContext'
 import { useLanguage } from '../../context/LanguageContext'
+import { usePageTitle } from '../../hooks/usePageTitle'
 import { formatPrice } from '../../utils/formatPrice'
 import CartItem from '../../components/CartItem/CartItem'
 import './CartPage.css'
@@ -8,6 +9,7 @@ import './CartPage.css'
 export default function CartPage() {
   const { cart, getCartTotal, getCartItemCount } = useCart()
   const { t } = useLanguage()
+  usePageTitle(t('cart.title'))
 
   if (cart.length === 0) {
     return (
@@ -45,7 +47,7 @@ export default function CartPage() {
             <span>{t('cart.total')}</span>
             <span>{formatPrice(getCartTotal())}</span>
           </div>
-          <button className="checkout-btn-large">{t('cart.checkout')}</button>
+          <Link to="/checkout" className="checkout-btn-large">{t('cart.checkout')}</Link>
           <Link to="/" className="continue-shopping-link">
             {t('cart.continueShopping')}
           </Link>

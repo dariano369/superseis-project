@@ -122,8 +122,58 @@ export default {
   'footer.hours': 'Horarios: Lunes a Domingo 8:00 - 22:00',
   'footer.rights': '2024 Superseis. Todos los derechos reservados.',
 
+  // Checkout page
+  'checkout.title': 'Finalizar Compra',
+  'checkout.shipping': 'Datos de Envío',
+  'checkout.payment': 'Método de Pago',
+  'checkout.name': 'Nombre completo',
+  'checkout.address': 'Dirección',
+  'checkout.city': 'Ciudad',
+  'checkout.phone': 'Teléfono',
+  'checkout.cashOnDelivery': 'Pago en efectivo',
+  'checkout.creditCard': 'Tarjeta de crédito',
+  'checkout.debitCard': 'Tarjeta de débito',
+  'checkout.cardNumber': 'Número de tarjeta',
+  'checkout.expiry': 'Vencimiento',
+  'checkout.cvv': 'CVV',
+  'checkout.placeOrder': 'Confirmar Pedido',
+  'checkout.backToCart': 'Volver al carrito',
+
+  // Order confirmation
+  'order.title': 'Pedido Confirmado',
+  'order.confirmed': 'Pedido Confirmado',
+  'order.thankYou': 'Gracias por tu compra',
+  'order.message': 'Tu pedido ha sido procesado exitosamente.',
+  'order.successMessage': 'Tu pedido ha sido procesado exitosamente. Te enviaremos un email con los detalles.',
+  'order.backHome': 'Volver al inicio',
+  'order.continueShopping': 'Seguir comprando',
+
+  // 404 page
+  'notFound.title': 'Página no encontrada',
+  'notFound.message': 'La página que buscás no existe o fue movida.',
+  'notFound.backHome': 'Volver al inicio',
+  'notFound.goHome': 'Volver al inicio',
+
+  // Login page
+  'login.signIn': 'Iniciar Sesión',
+  'login.register': 'Registrarse',
+  'login.email': 'Correo electrónico',
+  'login.password': 'Contraseña',
+  'login.confirmPassword': 'Confirmar contraseña',
+  'login.name': 'Nombre completo',
+  'login.signInBtn': 'Iniciar Sesión',
+  'login.registerBtn': 'Crear Cuenta',
+  'login.createAccount': 'Crear Cuenta',
+  'login.forgotPassword': '¿Olvidaste tu contraseña?',
+  'login.orSignIn': '¿Ya tenés cuenta? Iniciá sesión',
+  'login.orRegister': '¿No tenés cuenta? Registrate',
+
+  // Toast
+  'toast.addedToCart': 'Agregado al carrito',
+
   // Language names
   'lang.es': 'Español',
   'lang.en': 'English',
   'lang.gn': 'Guaraní',
+  'lang.de': 'Deutsch',
 }

@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { useCart } from '../../context/CartContext'
 import { useLanguage } from '../../context/LanguageContext'
+import { useToast } from '../../context/ToastContext'
 import { formatPrice } from '../../utils/formatPrice'
 import { getStockStatus, getStatusColor } from '../../utils/stockHelpers'
 import './ProductCard.css'
@@ -8,12 +9,14 @@ import './ProductCard.css'
 export default function ProductCard({ item }) {
   const { addToCart } = useCart()
   const { t, productName } = useLanguage()
+  const { addToast } = useToast()
   const status = getStockStatus(item)
 
   const handleAddToCart = (e) => {
     e.preventDefault()
     e.stopPropagation()
     addToCart(item)
+    addToast(`${productName(item)} — ${t('toast.addedToCart')}`)
   }
 
   return (
@@ -30,7 +33,7 @@ export default function ProductCard({ item }) {
         )}
 
         <div className="product-image">
-          <div className="image-placeholder">{productName(item).charAt(0)}</div>
+          <div className="image-placeholder">{item.emoji || productName(item).charAt(0)}</div>
         </div>
 
         <div className="product-info">

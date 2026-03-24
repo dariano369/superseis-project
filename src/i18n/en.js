@@ -122,8 +122,58 @@ export default {
   'footer.hours': 'Hours: Monday to Sunday 8:00 AM - 10:00 PM',
   'footer.rights': '2024 Superseis. All rights reserved.',
 
+  // Checkout page
+  'checkout.title': 'Checkout',
+  'checkout.shipping': 'Shipping Information',
+  'checkout.payment': 'Payment Method',
+  'checkout.name': 'Full name',
+  'checkout.address': 'Address',
+  'checkout.city': 'City',
+  'checkout.phone': 'Phone',
+  'checkout.cashOnDelivery': 'Cash on delivery',
+  'checkout.creditCard': 'Credit card',
+  'checkout.debitCard': 'Debit card',
+  'checkout.cardNumber': 'Card number',
+  'checkout.expiry': 'Expiry',
+  'checkout.cvv': 'CVV',
+  'checkout.placeOrder': 'Place Order',
+  'checkout.backToCart': 'Back to cart',
+
+  // Order confirmation
+  'order.title': 'Order Confirmed',
+  'order.confirmed': 'Order Confirmed',
+  'order.thankYou': 'Thank you for your purchase',
+  'order.message': 'Your order has been processed successfully.',
+  'order.successMessage': 'Your order has been processed successfully. We will send you an email with the details.',
+  'order.backHome': 'Back to home',
+  'order.continueShopping': 'Continue shopping',
+
+  // 404 page
+  'notFound.title': 'Page not found',
+  'notFound.message': 'The page you are looking for does not exist or has been moved.',
+  'notFound.backHome': 'Back to home',
+  'notFound.goHome': 'Back to home',
+
+  // Login page
+  'login.signIn': 'Sign In',
+  'login.register': 'Register',
+  'login.email': 'Email',
+  'login.password': 'Password',
+  'login.confirmPassword': 'Confirm password',
+  'login.name': 'Full name',
+  'login.signInBtn': 'Sign In',
+  'login.registerBtn': 'Create Account',
+  'login.createAccount': 'Create Account',
+  'login.forgotPassword': 'Forgot your password?',
+  'login.orSignIn': 'Already have an account? Sign in',
+  'login.orRegister': "Don't have an account? Register",
+
+  // Toast
+  'toast.addedToCart': 'Added to cart',
+
   // Language names
   'lang.es': 'Español',
   'lang.en': 'English',
   'lang.gn': 'Guaraní',
+  'lang.de': 'Deutsch',
 }
